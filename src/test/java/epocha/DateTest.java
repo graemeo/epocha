@@ -45,4 +45,30 @@ public class DateTest
         // then
         assertEquals(actual, expected);
     }
+
+    @Test
+    public void shouldReturnTotalNumberOfDaysForAGivenDateWithLeapYear() {
+        // given
+        Date date = new Date(1, 4, 2000);
+        int expected = 730622;
+
+        // when
+        int actual = date.getTotalNumberOfDaysForDate();
+
+        // then
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void shouldReturnTotalNumberOfDaysForAGivenDateWithNoLeapYear() {
+        // given
+        Date date = new Date(1, 4, 2001);
+        int expected = 730986;
+
+        // when
+        int actual = date.getTotalNumberOfDaysForDate();
+
+        // then
+        assertEquals(actual, expected);
+    }
 }

@@ -47,4 +47,8 @@ public class Date
 
         return numberOfDays;
     }
+
+    public int getTotalNumberOfDaysForDate() {
+        return day + getMonthInNumberOfDays() + getYearInNumberOfDays();
+    }
 }
