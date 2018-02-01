@@ -1,5 +1,7 @@
 package epocha;
 
+import epocha.types.MonthType;
+
 public class Date
 {
     private int day;
@@ -32,6 +34,17 @@ public class Date
     }
 
     public int getMonthInNumberOfDays() {
-        return 0;
+        int numberOfDays = 0;
+        boolean isLeapYear = year % 4 == 0;
+
+        for (int i = month; i > 0; i--) {
+            if (isLeapYear && MonthType.FEBRUARY.getMonth() == i) {
+                numberOfDays += 29;
+                continue;
+            }
+            numberOfDays += MonthType.getMonthInDays(i);
+        }
+
+        return numberOfDays;
     }
 }
