@@ -9,6 +9,7 @@ public class DateValidator
     private static final int MAX_ALLOWABLE_MONTH = 12;
     private static final int MIN_ALLOWABLE_MONTH = 1;
     private static final int MIN_ALLOWABLE_DAY = 1;
+    private static final int NUMBER_OF_DAYS_IN_FEBRUARY_WITH_LEAP_YEAR = 29;
 
     public static boolean isValidYear(int year) {
         return year >= MIN_ALLOWABLE_YEAR  && year <= MAX_ALLOWABLE_YEAR;
@@ -22,6 +23,11 @@ public class DateValidator
         boolean isLeapYear = year % 4 == 0;
 
         return day >= MIN_ALLOWABLE_DAY 
-                  && day <= (isLeapYear && MonthType.FEBRUARY.getMonth() == month ? 29 : MonthType.getMonthInDays(month));
+                  && day <= (isLeapYear && MonthType.FEBRUARY.getMonth() == month 
+                      ? NUMBER_OF_DAYS_IN_FEBRUARY_WITH_LEAP_YEAR : MonthType.getMonthInDays(month));
+    }
+
+    public static boolean isFirstDateEarlierThanSecondDate(int firstDateTotalNumberOfDays, int secondDateTotalNumberOfDays) {
+        return firstDateTotalNumberOfDays <= secondDateTotalNumberOfDays;
     }
 }

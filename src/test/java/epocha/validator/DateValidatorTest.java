@@ -117,4 +117,26 @@ public class DateValidatorTest
         assertTrue(DateValidator.isValidDay(date.getDay(), date.getMonth(), date.getYear()));
     }
 
+    @Test
+    public void shouldReturnFalseWhenTheFirstDateIsLaterThanTheSecondDate() {
+        // given
+        Date firstDate = new Date(1, 1, 2000);
+        Date secondDate = new Date(1, 1, 1999);
+
+        // when
+        // then
+        assertFalse(DateValidator.isFirstDateEarlierThanSecondDate(firstDate.getTotalNumberOfDaysForDate(), secondDate.getTotalNumberOfDaysForDate()));
+    }
+
+    @Test
+    public void shouldReturnTrueWhenTheFirstDateIsNoLaterThanTheSecondDate() {
+        // given
+        Date firstDate = new Date(1, 1, 1980);
+        Date secondDate = new Date(1, 1, 1983);
+
+        // when
+        // then
+        assertTrue(DateValidator.isFirstDateEarlierThanSecondDate(firstDate.getTotalNumberOfDaysForDate(), secondDate.getTotalNumberOfDaysForDate()));
+    }
+
 }
