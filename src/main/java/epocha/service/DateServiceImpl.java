@@ -1,41 +1,47 @@
 package epocha.service;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import epocha.Date;
+import epocha.response.DateResponse;
 import epocha.validator.DateValidator;
+import epocha.mapper.DateMapper;
 
 @Component
 public class DateServiceImpl implements DateService
 {
+    private static final String FILENAME = "src/main/resources/dates.txt";
+
     @Autowired
     private DateReaderService dateReaderService;
 
-    public void calculateDifferencesBetweenTwoDates() throws IOException {
-        List<String> listOfDates = dateReaderService.getDatesFromInputFile("src/main/resources/dates.txt");
+    public List<DateResponse> calculateDifferencesBetweenTwoDates() throws IOException {
+        List<List<Date>> listOfDates = dateReaderService.getDates(FILENAME);
+        List<DateResponse> listOfDateResponse = new ArrayList<DateResponse>();
 
-        for(String dates : listOfDates) {
+        for(List<Date> pairOfDates : listOfDates) {
+            int differencesInDays = -1;
+            Date firstDate = pairOfDates.get(0);
+            Date secondDate = pairOfDates.get(1);
+
             StringBuffer stringBuffer = new StringBuffer();
-            stringBuffer.append(dates + ", ");
-
-            String[] splitFirstDate = dates.split(",")[0].trim().split(" ");
-            String[] splitSecondDate = dates.split(",")[1].trim().split(" ");
-            
-            Date firstDate = new Date(Integer.parseInt(splitFirstDate[0]), Integer.parseInt(splitFirstDate[1]), Integer.parseInt(splitFirstDate[2])); 
-            Date secondDate = new Date(Integer.parseInt(splitSecondDate[0]), Integer.parseInt(splitSecondDate[1]), Integer.parseInt(splitSecondDate[2])); 
+            stringBuffer.append(firstDate.toString()).append(", ").append(secondDate.toString());
 
             if(isValidDate(firstDate, secondDate)) {
-                stringBuffer.append(secondDate.getTotalNumberOfDaysForDate() - firstDate.getTotalNumberOfDaysForDate());
-            } else {
-                stringBuffer.append("invalid date(s)!");
-            }
+                differencesInDays = secondDate.getTotalNumberOfDaysForDate() - firstDate.getTotalNumberOfDaysForDate();
+            } 
             
+            listOfDateResponse.add(DateMapper.mapDatesToDateResponse(firstDate, secondDate, differencesInDays));
+
+            stringBuffer.append(differencesInDays);
             System.out.println(stringBuffer.toString());
         }
+        return listOfDateResponse;
     }
 
     public boolean isValidDate(Date firstDate, Date secondDate) {

@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import epocha.Date;
+
 public class DateReaderServiceImplTest
 {
     @Test(expected = FileNotFoundException.class)
@@ -16,7 +18,7 @@ public class DateReaderServiceImplTest
         DateReaderService dateReaderService = new DateReaderServiceImpl();
 
         // when
-        dateReaderService.getDatesFromInputFile("src/test/resources/doesnotexist.txt");
+        dateReaderService.getDates("src/test/resources/doesnotexist.txt");
 
         // then
     }
@@ -27,7 +29,7 @@ public class DateReaderServiceImplTest
         DateReaderService dateReaderService = new DateReaderServiceImpl();
         
         // when
-        List<String> actual = dateReaderService.getDatesFromInputFile("src/test/resources/empty.txt");
+        List<List<Date>> actual = dateReaderService.getDates("src/test/resources/empty.txt");
 
         // then
         assertTrue(actual.isEmpty());
@@ -39,9 +41,10 @@ public class DateReaderServiceImplTest
         DateReaderService dateReaderService = new DateReaderServiceImpl();
         
         // when
-        List<String> actual = dateReaderService.getDatesFromInputFile("src/test/resources/dates.txt");
+        List<List<Date>> actual = dateReaderService.getDates("src/test/resources/dates.txt");
 
         // then
         assertTrue(actual.size() == 3);
+        assertTrue(actual.get(0).size() == 2);
     }
 }

@@ -3,7 +3,9 @@ package epocha.service;
 import java.util.List;
 import java.io.IOException;
 
+import epocha.Date;
+
 public interface DateReaderService
 {
-    List<String> getDatesFromInputFile(String path) throws IOException;
+    List<List<Date>> getDates(String path) throws IOException;
 }

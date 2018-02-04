@@ -14,6 +14,21 @@ public class Date
         this.year = year;
     }
 
+    public Date() {
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
     public int getDay() {
         return day;
     }
@@ -50,5 +65,11 @@ public class Date
 
     public int getTotalNumberOfDaysForDate() {
         return day + getMonthInNumberOfDays() + getYearInNumberOfDays();
+    }
+
+    public String toString() {
+        StringBuffer stringBuffer = new StringBuffer();
+        
+        return stringBuffer.append(day).append(" ").append(month).append(" ").append(year).toString();
     }
 }
