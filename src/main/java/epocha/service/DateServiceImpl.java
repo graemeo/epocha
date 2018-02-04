@@ -3,13 +3,19 @@ package epocha.service;
 import java.util.List;
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import epocha.Date;
 import epocha.validator.DateValidator;
 
+@Component
 public class DateServiceImpl implements DateService
 {
+    @Autowired
+    private DateReaderService dateReaderService;
+
     public void calculateDifferencesBetweenTwoDates() throws IOException {
-        DateReaderService dateReaderService = new DateReaderServiceImpl();
         List<String> listOfDates = dateReaderService.getDatesFromInputFile("src/main/resources/dates.txt");
 
         for(String dates : listOfDates) {

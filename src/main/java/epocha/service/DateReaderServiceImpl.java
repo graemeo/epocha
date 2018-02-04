@@ -7,6 +7,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class DateReaderServiceImpl implements DateReaderService
 {
     public List<String> getDatesFromInputFile(String path) throws IOException {

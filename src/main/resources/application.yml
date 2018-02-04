@@ -1,0 +1,7 @@
+spring:
+    application:
+        name: epocha
+
+server:
+    contextPath: /epocha
+    port: 9090
