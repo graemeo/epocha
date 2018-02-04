@@ -30,4 +30,8 @@ public class DateValidator
     public static boolean isFirstDateEarlierThanSecondDate(int firstDateTotalNumberOfDays, int secondDateTotalNumberOfDays) {
         return firstDateTotalNumberOfDays <= secondDateTotalNumberOfDays;
     }
+
+    public static boolean isValidDate(int day, int month, int year) {
+        return isValidYear(year) && isValidMonth(month) && isValidDay(day, month, year);
+    }
 }
