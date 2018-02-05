@@ -10,6 +10,11 @@ buildscript {
 apply plugin: "java"
 apply plugin: "org.springframework.boot"
 
+jar {
+    baseName = "epocha"
+    version = "1.0.0"
+}
+
 repositories {
     mavenCentral()
 }
