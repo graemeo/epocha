@@ -1,6 +1,7 @@
 package epocha.validator;
 
 import epocha.types.MonthType;
+import epocha.Date;
 
 public class DateValidator
 {
@@ -33,5 +34,11 @@ public class DateValidator
 
     public static boolean isValidDate(int day, int month, int year) {
         return isValidYear(year) && isValidMonth(month) && isValidDay(day, month, year);
+    }
+
+    public static boolean validateTwoDates(Date firstDate, Date secondDate) {
+        return isFirstDateEarlierThanSecondDate(firstDate.getTotalNumberOfDaysForDate(), secondDate.getTotalNumberOfDaysForDate()) 
+                 && isValidDate(firstDate.getDay(), firstDate.getMonth(), firstDate.getYear()) 
+                 && isValidDate(secondDate.getDay(), secondDate.getMonth(), secondDate.getYear());
     }
 }

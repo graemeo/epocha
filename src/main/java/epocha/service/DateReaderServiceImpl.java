@@ -31,5 +31,5 @@ public class DateReaderServiceImpl implements DateReaderService
         }
 
         return listOfDates;
-    }
+    } 
 }

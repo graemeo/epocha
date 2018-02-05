@@ -29,24 +29,12 @@ public class DateServiceImpl implements DateService
             Date firstDate = pairOfDates.get(0);
             Date secondDate = pairOfDates.get(1);
 
-            StringBuffer stringBuffer = new StringBuffer();
-            stringBuffer.append(firstDate.toString()).append(", ").append(secondDate.toString());
-
-            if(isValidDate(firstDate, secondDate)) {
+            if(DateValidator.validateTwoDates(firstDate, secondDate)) {
                 differencesInDays = secondDate.getTotalNumberOfDaysForDate() - firstDate.getTotalNumberOfDaysForDate();
             } 
             
             listOfDateResponse.add(DateMapper.mapDatesToDateResponse(firstDate, secondDate, differencesInDays));
-
-            stringBuffer.append(differencesInDays);
-            System.out.println(stringBuffer.toString());
         }
         return listOfDateResponse;
-    }
-
-    public boolean isValidDate(Date firstDate, Date secondDate) {
-        return DateValidator.isFirstDateEarlierThanSecondDate(firstDate.getTotalNumberOfDaysForDate(), secondDate.getTotalNumberOfDaysForDate()) 
-                 && DateValidator.isValidDate(firstDate.getDay(), firstDate.getMonth(), firstDate.getYear()) 
-                 && DateValidator.isValidDate(secondDate.getDay(), secondDate.getMonth(), secondDate.getYear());
     }
 }
