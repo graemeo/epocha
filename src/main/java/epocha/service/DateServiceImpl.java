@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import epocha.Date;
 import epocha.response.DateResponse;
+import epocha.response.Response;
 import epocha.validator.DateValidator;
 import epocha.mapper.DateMapper;
 
@@ -20,9 +21,10 @@ public class DateServiceImpl implements DateService
     @Autowired
     private DateReaderService dateReaderService;
 
-    public List<DateResponse> calculateDifferencesBetweenTwoDates() throws IOException {
+    public Response calculateDifferencesBetweenTwoDates() throws IOException {
         List<List<Date>> listOfDates = dateReaderService.getDates(FILENAME);
         List<DateResponse> listOfDateResponse = new ArrayList<DateResponse>();
+        Response response = new Response();
 
         for(List<Date> pairOfDates : listOfDates) {
             int differencesInDays = -1;
@@ -35,6 +37,9 @@ public class DateServiceImpl implements DateService
             
             listOfDateResponse.add(DateMapper.mapDatesToDateResponse(firstDate, secondDate, differencesInDays));
         }
-        return listOfDateResponse;
+
+        response.setDates(listOfDateResponse);
+
+        return response;
     }
 }
