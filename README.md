@@ -27,6 +27,7 @@ Given the above high level descriptions, a few assumptions need to be made to li
 
 * Java 7 and above
 * Gradle - optional as Gradle wrapper is already included
+* Access to Maven Central - to ensure you do not have proxy configured which may affect downloading dependencies
 
 ## Usage(s)
 

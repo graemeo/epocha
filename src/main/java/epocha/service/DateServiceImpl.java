@@ -36,10 +36,26 @@ public class DateServiceImpl implements DateService
             } 
             
             listOfDateResponse.add(DateMapper.mapDatesToDateResponse(firstDate, secondDate, differencesInDays));
+            print(firstDate, secondDate, differencesInDays);
         }
 
         response.setDates(listOfDateResponse);
 
         return response;
+    }
+
+    private void print(Date firstDate, Date secondDate, int differencesInDays) {
+        StringBuffer stringBuffer  = new StringBuffer();
+        stringBuffer.append(firstDate.toString());
+        stringBuffer.append(", ");
+        stringBuffer.append(secondDate.toString());
+        stringBuffer.append(", ");
+        if (differencesInDays > -1) {
+             stringBuffer.append(Integer.toString(differencesInDays));
+        } else { 
+             stringBuffer.append("Invalid date(s) supplied!");
+        }
+
+        System.out.println(stringBuffer.toString());
     }
 }
